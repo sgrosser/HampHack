@@ -1,0 +1,16 @@
+import java.awt.*; 
+ import java.awt.color.ColorSpace; 
+ import java.awt.image.*; 
+ import java.io.*; 
+ import javax.imageio.*; 
+ import javax.swing.*; 
+ import java.util.ArrayList;
+public class BarrellMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<Item> items = new ArrayList<Item>();
+		
+	}
+
+}
