@@ -55,7 +55,7 @@ public class notification {
 		JLabel messg = new JLabel(mainMessage);
 		messg.setForeground(Color.RED);
 		messg.setFont(new Font("Seravik", Font.PLAIN, 20));
-		messg.setBounds(0, 70, 500, 400);
+		messg.setBounds(0, 70, 700, 400);
 		
 		newFrame.add(messg);
 		
