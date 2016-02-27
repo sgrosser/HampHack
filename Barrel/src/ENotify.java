@@ -43,7 +43,7 @@ public class ENotify {
 		else warn = new JLabel("Energy Report");
 		warn.setForeground(Color.RED);
 		warn.setFont(new Font("Seravik", Font.PLAIN, 50));
-		warn.setBounds(10, 10, 250, 50);
+		warn.setBounds(10, 10, 300, 75);
 		JLabel messg = new JLabel(msg);
 		messg.setForeground(Color.RED);
 		messg.setFont(new Font("Seravik", Font.PLAIN, 25));
