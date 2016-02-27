@@ -7,17 +7,23 @@ public class Item {
 	public int dateRanOut;
 	public int lastingFactor; //attempt to decrease with Go Green
 	public boolean low = false;
-	public int importance;
+	
 	public int quickLoss; // period length of loss of more than 33%
 	public int daysSincePurchase = 0;
+	public int averageUse=0;
 
-	public Item(String name, int origStock, int purchaseDate, int estimatedLast, int imp){
+	public Item(String name, int origStock, int purchaseDate, int estimatedLast){
 		this.name=name;
 		this.OriginalStock=origStock;
 		this.CurrentStock = origStock;
 		this.lastingFactor = estimatedLast;
-		this.importance = imp;
+
 		
+	}
+	
+	public void newAverageUse(int a){
+		if(averageUse ==0) averageUse = a;
+		else averageUse = (averageUse + a)/2;
 	}
 	
 }
