@@ -21,9 +21,11 @@ import java.util.ArrayList;
 
 
 public class ENotify {
-	String msg;
-	public ENotify(String msg){
+	public String msg;
+	public boolean warning;
+	public ENotify(String msg, boolean warning){
 		this.msg = msg;
+		this.warning = warning;
 		display();
 	}
 	public void display(){
@@ -32,15 +34,22 @@ public class ENotify {
 
 		newFrame.setLocationRelativeTo(null);
 		
-		newFrame.setSize(500, 500);
+		newFrame.setSize(700, 500);
 		newFrame.setLayout(null);
-		JLabel warn = new JLabel("Warning!");
+		JLabel warn;
+		if(this.warning) {
+			warn = new JLabel("Warning!");
+		}
+		else warn = new JLabel("Energy Report");
 		warn.setForeground(Color.RED);
 		warn.setFont(new Font("Seravik", Font.PLAIN, 50));
-		warn.setBounds(10, 10, 200, 50);
+		warn.setBounds(10, 10, 250, 50);
 		JLabel messg = new JLabel(msg);
 		messg.setForeground(Color.RED);
 		messg.setFont(new Font("Seravik", Font.PLAIN, 25));
-		messg.setBounds(10, 100, 500 , 500);
+		messg.setBounds(10, 100, 690 , 100);
+		newFrame.add(warn);
+		newFrame.add(messg);
+		newFrame.setVisible(true);
 	}
 }

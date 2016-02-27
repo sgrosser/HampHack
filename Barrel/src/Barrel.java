@@ -255,7 +255,7 @@ public class Barrel {
 
 
 	}
-
+	static String EnergyReport = "";
 	public static void openEnergyManager(){
 		JFrame mainEnergy= new JFrame();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -299,7 +299,7 @@ public class Barrel {
 		devNm.setForeground(color);
 		devNm.setFont(new Font("Seravik", Font.PLAIN, 25));
 		devNm.setBounds(20, 200, 250, 30);
-		JTextField deviceName = new JTextField("Hal");
+		JTextField deviceName = new JTextField("");
 		deviceName.setBounds(300, 200, 100, 25);
 		JButton addChgDev = new JButton("Add Charged Device");
 		addChgDev.setBounds(20, 300, 200, 50);
@@ -308,7 +308,7 @@ public class Barrel {
 			//TODO
 			String nm = deviceName.getText();
 			electronics.put(nm, new Electronic(nm, Integer.parseInt(chargeTime.getText()), equipTp.getSelectedItem().toString()));
-			deviceName.setText("Hal");
+			deviceName.setText("");
 			chargeTime.setText("");
 			electronics.get(nm).plugIn();
 			
@@ -329,7 +329,15 @@ public class Barrel {
 		unplugButton.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
 			//TODO
 			String nam = unplugDev.getText();
-			unplugDev.setText("Hal");
+			unplugDev.setText("");
+			electronics.get(nam).pullOut();
+			if(electronics.get(nam).overCharge < 4) {
+				EnergyReport+="Good job saving energy with " + nam +"! Keep up the good work. \n";
+				
+			}
+			else if(electronics.get(nam).overCharge < 15) EnergyReport+="You did not do well. You wasted energy by leaving " + nam + " plugged in! \n";
+			
+			else EnergyReport+="Terribly done! You did not save energy by unplugging " + nam +"! \n";
 		}});
 		mainEnergy.add(chgTme);
 		mainEnergy.add(chargeTime);
@@ -343,6 +351,30 @@ public class Barrel {
 		mainEnergy.add(unplugDev);
 		
 		mainEnergy.add(unplugButton);
+		
+		JButton showEnergyReport = new JButton("Show Energy Report");
+		showEnergyReport.setBounds(550, 400, 150, 25);
+		mainEnergy.add(showEnergyReport);
+		
+		showEnergyReport.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
+			//TODO
+			Indico indico = new Indico("b2909fcc1f89d44ba434f45e2ca16b49");
+			IndicoResult single;
+			try {
+				single = indico.sentiment.predict(EnergyReport);
+				Double result = single.getSentiment();
+				System.out.println(result);
+				System.out.println(EnergyReport);
+				ENotify n;
+				if(result < 0.5) n = new ENotify("You have a negative energy report. Improve your usage!",false);
+				else  n = new ENotify("You have a positive energy report! Keep up the good work!", false);
+			} catch (UnsupportedOperationException | IOException | IndicoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}});
+		
+		
 		
 		mainEnergy.setVisible(true);
 
