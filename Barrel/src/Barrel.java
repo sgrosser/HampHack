@@ -51,7 +51,7 @@ public class Barrel {
 	action.setBackground(Color.BLACK);
 	action.setForeground(color);
 	action.setFont(new Font("Seravik", Font.PLAIN, 25));
-	action.setBounds(50,100,75 , 150);
+	action.setBounds(50,100,200 , 150);
 	mainFrame.add(action);
 	
 	
@@ -95,23 +95,39 @@ public class Barrel {
 	
 	//update job left section
 	JLabel itemName = new JLabel("Item Name");
+	itemName.setForeground(color);
 	itemName.setFont(new Font("Seravik", Font.PLAIN, 25));
-	itemName.setBounds(50,100,75 , 150);
+	itemName.setBounds(80,170,200 , 90);
 	JTextField itemNameTextField=new JTextField();
-	
+	itemNameTextField.setBounds(100, 250, 100 , 25);
 	JTextField purchase = new JTextField();
 	JLabel purchased = new JLabel("How much was purchased?");
+	purchased.setFont(new Font("Seravik", Font.PLAIN, 25));
+	purchased.setForeground(color);
+	purchased.setBounds(80,400,350 , 50);
+	purchase.setBounds(100, 450, 100, 25);
 	
+	mainFrame.add(itemName);
+	mainFrame.add(itemNameTextField);
+	mainFrame.add(purchase);
+	mainFrame.add(purchased);
 	JLabel usedInv = new JLabel("How much was used?");
+	usedInv.setForeground(color);
+	usedInv.setFont(new Font("Seravik", Font.PLAIN, 25));
+	usedInv.setBounds(80, 600 , 250, 50 );
 	JTextField usedInventory = new JTextField();
+	usedInventory.setBounds(100, 650, 100, 25);
+	mainFrame.add(usedInv);
+	mainFrame.add(usedInventory);
 	//Todo
 	//Update A job!!
 	JButton submitItemUpdate = new JButton("Submit Item Update");
+	submitItemUpdate.setBounds(80, 800, 200, 50);
 	submitItemUpdate.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
 		
 		
 	}});
-	
+	mainFrame.add(submitItemUpdate);
 	
 	
 	
