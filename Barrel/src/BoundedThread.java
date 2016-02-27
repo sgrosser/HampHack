@@ -5,6 +5,7 @@ public class BoundedThread<T> implements Runnable{
 
 	private int MAX_ENERGY_USAGE;
 	private Timer t;
+	private String BELOW_THRESHOLD_MSG;
 	private int CURR_ENEG_LEFT;
 	private int ENRGY_FLOW; // energy used in 1 second
 	private Callable<T> action;
@@ -26,7 +27,8 @@ public class BoundedThread<T> implements Runnable{
 			CURR_ENEG_LEFT-=ENRGY_FLOW;
 			if(CURR_ENEG_LEFT <= 0 ) HAS_USE = false;
 			if(CURR_ENEG_LEFT < MAX_ENERGY_USAGE * (1 - LAX_THRESHOLD)){
-
+				S.addToReport(BELOW_THRESHOLD_MSG);
+				
 			}
 
 
@@ -36,6 +38,8 @@ public class BoundedThread<T> implements Runnable{
 		}
 	}
 	//TODO have function to report to S
+	
+	
 	private T actionMethod(Callable<T> func) throws Exception{
 		return func.call();
 	}
@@ -65,5 +69,11 @@ public class BoundedThread<T> implements Runnable{
 	}
 	public double getLAX_THRESHOLD() {
 		return LAX_THRESHOLD;
+	}
+	public String getBELOW_THRESHOLD_MSG() {
+		return BELOW_THRESHOLD_MSG;
+	}
+	public void setBELOW_THRESHOLD_MSG(String bELOW_THRESHOLD_MSG) {
+		BELOW_THRESHOLD_MSG = bELOW_THRESHOLD_MSG;
 	}
 }
