@@ -113,7 +113,7 @@ public class Barrel {
 			String name = itemNameTextField.getText();
 			itemNameTextField.setText("");
 			items.get(name).update(used, bought, dayCounter);
-			System.out.println("Updated " + name);
+			
 		}});
 		mainFrame.add(submitItemUpdate);
 		
@@ -130,12 +130,29 @@ public class Barrel {
 			// handle exception...
 		}
 		ImageIcon imageIcon = new ImageIcon(image);
-		JLabel jLabel = new JLabel();
-		jLabel.setIcon(imageIcon);
-		jLabel.setLayout(null);
-		jLabel.setBounds(670, 300,850,400);
+		JButton jLabelImg = new JButton(imageIcon);
+		
+		
+		jLabelImg.setBounds(640, 300,250,250);
 
-
+		jLabelImg.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
+			Indico indico = new Indico("b2909fcc1f89d44ba434f45e2ca16b49");
+			IndicoResult single;
+			try {
+				single = indico.sentiment.predict(businessReport);
+				Double result = single.getSentiment();
+				System.out.println(result);
+				System.out.println(businessReport);
+				notification n;
+				if(result < 0.5) n = new notification("You have a negative business report. Improve your usage!",false);
+				else  n = new notification("You have a positive business report! Keep up the good work!", false);
+			} catch (UnsupportedOperationException | IOException | IndicoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}});
 
 
 		//add item right side
@@ -179,14 +196,14 @@ public class Barrel {
 			int lastFactor = Integer.parseInt(lastingField.getText());
 			lastingField.setText("");
 			items.put(itName, new Item(itName, stock, dayCounter, lastFactor ));
-			System.out.println("Added" + itName);
+			
 			
 		}});
 		mainFrame.add(submitItemUpdate);
 		mainFrame.add(last);
 		mainFrame.add(lastingField);
 		mainFrame.add(submitItem);
-		mainFrame.add(jLabel);
+		mainFrame.add(jLabelImg);
 		
 		//Day Counter
 		JLabel updateDay = new JLabel("Update the day:");
@@ -211,14 +228,12 @@ public class Barrel {
 	}
 
 	static int dayCounter = 1;
+	static String businessReport ="";
 	static HashMap<String, Item> items = new HashMap<String, Item>();
 	public static void main(String[] args) throws UnsupportedOperationException, IOException, IndicoException {
 		// TODO Auto-generated method stub
 		display();
-		/*Indico indico = new Indico("b2909fcc1f89d44ba434f45e2ca16b49");
-		IndicoResult single = indico.sentiment.predict("I love writing code!");
-		Double result = single.getSentiment();
-		System.out.println(result);*/
+		
 
 	}
 

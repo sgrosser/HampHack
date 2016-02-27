@@ -21,27 +21,37 @@ import java.util.ArrayList;
 
 public class notification {
 	public String mainMessage;
-	notification(String msg){
+	public boolean notify;
+	notification(String msg, boolean notificationTitle){
 		this.mainMessage = msg;
+		notify = notificationTitle;
 		display();
 	}
 	public void display(){
-		System.out.println("In notification display function");
+		
 		JFrame newFrame = new JFrame();
 		newFrame.getContentPane().setBackground(Color.BLACK);
 
 		newFrame.setLocationRelativeTo(null);
-		newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		newFrame.setSize(500, 500);
-		newFrame.setLayout(null);
 		
+		newFrame.setSize(700, 500);
+		newFrame.setLayout(null);
+		if(notify){
 		JLabel not = new JLabel("Notification!!!");
 		not.setForeground(Color.YELLOW);
 		not.setFont(new Font("Seravik", Font.PLAIN, 50));
 		not.setBounds(0,10,300 , 100);
 		
 		newFrame.add(not);
-		
+		}
+		else{
+			JLabel not = new JLabel("Business Report");
+			not.setForeground(Color.GREEN);
+			not.setFont(new Font("Seravik", Font.PLAIN, 50));
+			not.setBounds(0,10,500 , 100);
+			
+			newFrame.add(not);
+		}
 		JLabel messg = new JLabel(mainMessage);
 		messg.setForeground(Color.RED);
 		messg.setFont(new Font("Seravik", Font.PLAIN, 20));
