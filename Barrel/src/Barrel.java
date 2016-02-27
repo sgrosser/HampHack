@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.logging.Level; 
 import java.util.logging.Logger; 
 import javax.imageio.ImageIO; 
+import io.indico.*;
+import io.indico.api.results.IndicoResult;
+import io.indico.api.utils.IndicoException;
 
 import javax.swing.*; 
 import java.util.ArrayList;
@@ -100,6 +103,8 @@ public class Barrel {
 		//Update A job!!
 		JButton submitItemUpdate = new JButton("Submit Item Update");
 		submitItemUpdate.setBounds(80, 800, 200, 50);
+		
+		
 		submitItemUpdate.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
 			int used = Integer.parseInt(usedInventory.getText());
 			int bought = Integer.parseInt(purchase.getText());
@@ -107,8 +112,8 @@ public class Barrel {
 			usedInventory.setText("");
 			String name = itemNameTextField.getText();
 			itemNameTextField.setText("");
-			items.get(name).update(used, bought);
-
+			items.get(name).update(used, bought, dayCounter);
+			System.out.println("Updated " + name);
 		}});
 		mainFrame.add(submitItemUpdate);
 		
@@ -174,6 +179,7 @@ public class Barrel {
 			int lastFactor = Integer.parseInt(lastingField.getText());
 			lastingField.setText("");
 			items.put(itName, new Item(itName, stock, dayCounter, lastFactor ));
+			System.out.println("Added" + itName);
 			
 		}});
 		mainFrame.add(submitItemUpdate);
@@ -206,10 +212,13 @@ public class Barrel {
 
 	static int dayCounter = 1;
 	static HashMap<String, Item> items = new HashMap<String, Item>();
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedOperationException, IOException, IndicoException {
 		// TODO Auto-generated method stub
 		display();
-
+		Indico indico = new Indico("b2909fcc1f89d44ba434f45e2ca16b49");
+		IndicoResult single = indico.sentiment.predict((String)"I love writing code!");
+		Double result = single.getSentiment();
+		System.out.println(result);
 
 	}
 
