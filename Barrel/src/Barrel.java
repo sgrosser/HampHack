@@ -60,35 +60,12 @@ public class Barrel {
 
 
 
-
-
-
-
 		mainFrame.setSize(1600, 1000);
-
-
-
-
-
-		//button1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
-		/*spreadsheet ss=new spreadsheet();
-		ss.spreadsheetDisplay();
-		jobdataEntry jde=new jobdataEntry();
-		jde.jobdataEntryDisplay();*/
-
-		//}});
-
-
-		//button1.setVisible(true);
-
 
 
 		mainFrame.add(button1);
 
 		mainFrame.add(jLabel5);
-
-
-
 
 
 		mainFrame.setLayout(null);
@@ -106,7 +83,7 @@ public class Barrel {
 		purchased.setForeground(color);
 		purchased.setBounds(80,400,350 , 50);
 		purchase.setBounds(100, 450, 100, 25);
-
+		
 		mainFrame.add(itemName);
 		mainFrame.add(itemNameTextField);
 		mainFrame.add(purchase);
@@ -119,16 +96,23 @@ public class Barrel {
 		usedInventory.setBounds(100, 650, 100, 25);
 		mainFrame.add(usedInv);
 		mainFrame.add(usedInventory);
-		//Todo
+		//TODO:
 		//Update A job!!
 		JButton submitItemUpdate = new JButton("Submit Item Update");
 		submitItemUpdate.setBounds(80, 800, 200, 50);
 		submitItemUpdate.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
-
+			int used = Integer.parseInt(usedInventory.getText());
+			int bought = Integer.parseInt(purchase.getText());
+			purchase.setText("");
+			usedInventory.setText("");
+			String name = itemNameTextField.getText();
+			itemNameTextField.setText("");
+			items.get(name).update(used, bought);
 
 		}});
 		mainFrame.add(submitItemUpdate);
-
+		
+		
 
 
 
@@ -144,7 +128,7 @@ public class Barrel {
 		JLabel jLabel = new JLabel();
 		jLabel.setIcon(imageIcon);
 		jLabel.setLayout(null);
-		jLabel.setBounds(670, 200,850,400);
+		jLabel.setBounds(670, 300,850,400);
 
 
 
@@ -197,10 +181,30 @@ public class Barrel {
 		mainFrame.add(lastingField);
 		mainFrame.add(submitItem);
 		mainFrame.add(jLabel);
+		
+		//Day Counter
+		JLabel updateDay = new JLabel("Update the day:");
+		updateDay.setForeground(color);
+		updateDay.setFont(new Font("Seravik", Font.PLAIN, 25));
+		updateDay.setBounds(700,100, 300 , 50);
+		JTextField updDy = new JTextField("1");
+		updDy.setBounds(750, 150, 50 , 25);
+		mainFrame.add(updDy);
+		JButton dayButton = new JButton("Update");
+		dayButton.setBounds(720, 210, 100, 25);
+		
+		
+		dayButton.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
+			dayCounter = Integer.parseInt(updDy.getText());
+			
+		}});
+		
+		mainFrame.add(dayButton);
+		mainFrame.add(updateDay);
 		mainFrame.setVisible(true);
 	}
 
-	static int dayCounter = 0;
+	static int dayCounter = 1;
 	static HashMap<String, Item> items = new HashMap<String, Item>();
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

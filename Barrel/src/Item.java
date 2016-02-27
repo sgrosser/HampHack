@@ -26,4 +26,9 @@ public class Item {
 		else averageUse = (averageUse + a)/2;
 	}
 	
+	public void update(int used, int bought){
+		
+		
+	}
+	
 }
