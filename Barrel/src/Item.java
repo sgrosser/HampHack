@@ -43,7 +43,7 @@ public class Item {
 		}
 
 		if(increaseAverageUseCounter > 3) {
-			notification n = new notification ("Average consumption has increased", true);
+			notification n = new notification ("Average consumption of " + name + " has increased", true);
 			Barrel.businessReport += "You are increasing your average consumption. Stop and reduce your usage!";
 		}
 
@@ -60,7 +60,7 @@ public class Item {
 		if(bought!=0){
 			if(CurrentStock< (int) OriginalStock/5) Barrel.businessReport += "Good job refilling stock of" + this.name + "before you ran out!" +"\n";
 			if(date - dateOfMostRecentPurchase < lastingFactor && !low){
-				notification n = new notification("Shouldn't have bought for " + (lastingFactor - date + dateOfMostRecentPurchase) + " more days!", true);
+				notification n = new notification("Shouldn't have bought "+ name + " for " + (lastingFactor - date + dateOfMostRecentPurchase) + " more days!", true);
 				Barrel.businessReport += "Stop and slow down! You bought when your supply would have lasted another " + (lastingFactor - date + dateOfMostRecentPurchase) + " days! This is bad! Reduce your purchases.  \n";
 			}	
 			low = false;
