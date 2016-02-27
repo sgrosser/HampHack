@@ -215,10 +215,10 @@ public class Barrel {
 	public static void main(String[] args) throws UnsupportedOperationException, IOException, IndicoException {
 		// TODO Auto-generated method stub
 		display();
-		Indico indico = new Indico("b2909fcc1f89d44ba434f45e2ca16b49");
-		IndicoResult single = indico.sentiment.predict((String)"I love writing code!");
+		/*Indico indico = new Indico("b2909fcc1f89d44ba434f45e2ca16b49");
+		IndicoResult single = indico.sentiment.predict("I love writing code!");
 		Double result = single.getSentiment();
-		System.out.println(result);
+		System.out.println(result);*/
 
 	}
 
